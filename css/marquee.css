@@ -1,0 +1,17 @@
+
+
+.marquee {
+  color : #FF0000;
+  animation-name: marquee; 
+  animation-timing-function: linear;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  display:inline;
+}
+
+@keyframes marquee {
+0% { margin-left:0; }
+50% { margin-left: 50%; }
+
+}
