@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness - Phishing Demo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff3cd;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #856404;
+        }
+
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 450px;
+            max-width: 90%;
+        }
+
+        h1 {
+            color: #d9534f;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #c9302c;
+        }
+
+        .warning {
+            font-weight: bold;
+            color: #d9534f;
+        }
+        .alert-box {
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d9534f;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+    animation: slideDown 0.8s ease-out forwards, shake 0.4s ease-in-out 1s, fadeOut 0.8s ease-in-out 4s forwards;
+    z-index: 9999;
+}
+
+@keyframes slideDown {
+    from { top: -80px; }
+    to { top: 20px; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(-50%) translateX(0); }
+    25% { transform: translateX(-50%) translateX(-8px); }
+    50% { transform: translateX(-50%) translateX(8px); }
+    75% { transform: translateX(-50%) translateX(-8px); }
+    100% { transform: translateX(-50%) translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; top: -80px; }
+}
+
+    </style>
+
+   
+</head>
+
+<body>
+    <div id="animatedAlert" class="alert-box">
+    ⚠️ WARNING: If this were real, your password would be stolen!  
+    Stay alert for phishing scams.
+</div>
+
+    <div class="card">
+        <h1>🚨 GOTCHA! (But Safely)</h1>
+        <p class="warning">This was a phishing demonstration.</p>
+
+        <p>
+            You just entered your username and password into a page that 
+            <b>looked familiar</b>… and then got redirected here.
+        </p>
+
+        <p>
+            This is exactly how real phishing attacks trick people into giving away sensitive information.
+        </p>
+
+        <h3>💡 What is Phishing?</h3>
+        <p>
+            Phishing is when attackers create a fake website or form that looks legit 
+            in order to steal your login information, money, or identity.
+        </p>
+
+        <p>
+            If this were a real attack, your password would now be in someone else’s hands.
+            <br><br><b>Scary, right?</b>
+        </p>
+
+        <p style="font-style: italic;">
+            Remember: Always check the URL before entering your login details!
+        </p>
+
+        <a class="btn" href="index.html">Go Back (and Stay Safe)</a>
+    </div>
+</body>
+</html>
